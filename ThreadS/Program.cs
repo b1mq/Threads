@@ -65,27 +65,106 @@
 //DisplayArray(n3);
 //Console.WriteLine();
 //DisplayArray(n4);
-void Waiting()
-{
-	for (int i = 0; i < 10; i++)
-	{
-        Console.WriteLine($"Timee {i}");
-		Thread.Sleep(1000);
-	}
-}
-void Shortchange()
-{
-	int i = 0;
-	while (true)
-	{
-        Console.WriteLine(i);
-		i++;
-        Thread.Sleep(1);
-    }
-}
-var t1 = new Thread(Waiting) ;
-var t2 = new Thread( Shortchange);
+//void Waiting()
+//{
+//	for (int i = 0; i < 10; i++)
+//	{
+//        Console.WriteLine($"Timee {i}");
+//		Thread.Sleep(1000);
+//	}
+//}
+//void Shortchange()
+//{
+//	int i = 0;
+//	while (true)
+//	{
+//        Console.WriteLine(i);
+//		i++;
+//        Thread.Sleep(1);
+//    }
+//}
+//var t1 = new Thread(Waiting) ;
+//var t2 = new Thread( Shortchange);
+//t1.Start();
+//t2.Start();
+//t1.Join();
+//t2.Join();
+
+//void GenerateTable(int num,int a,int b)
+//{
+//    if (a > b)
+//    {
+//        throw new ArgumentException("Error");
+//    }
+//    for (int i = a; i < b; i++)
+//    {
+//        Console.WriteLine($"\t {i}*{num} = {i*num}");
+//        Thread.Sleep(10);
+//    }
+//}
+//var t1 = new Thread(() => GenerateTable(1, 1, 10));
+//var t2 = new Thread(() => GenerateTable(2, 1, 10));
+//// и так далее
+//t1.Start();
+//t2.Start();
+//t1.Join();
+//t2.Join();
+//void DisplayArray(int[] numbers) => numbers.ToList().ForEach(x => Console.WriteLine(x));
+//bool IsPrime(int n)
+//{
+//    if (n < 2) return false;
+//    for (int i = 2; i * i <= n; i++)
+//        if (n % i == 0)
+//            return false;
+//    return true;
+//}
+//int[] numbers = Enumerable.Range(0, 1000).ToArray();
+//void FindPrimeInArray(int[] numbers,int x,int y)
+//{
+//    int[] res = { };
+//    int count = 0;
+//    for (int i = x;i < y; i++)
+//    {
+//        if (IsPrime(numbers[i]))
+//        {
+//            res[count] = numbers[i];
+//            count++;
+//        }
+//    }
+//    Console.WriteLine($"Простые числа в от диапозона {x} до {y}");
+//    DisplayArray(res);
+
+//}
+//var t1 = new Thread(() => FindPrimeInArray(numbers, 0, 400));
+//var t2 = new Thread(() => FindPrimeInArray(numbers, 400, 800));
+//var t3 = new Thread(() => FindPrimeInArray(numbers, 800, 1000));
+//t1.Start();
+//t2.Start();
+//t3.Start();
+//t1.Join();
+//t2.Join();
+//t3.Join();
+
+string text = "Today we need to talk about USA. USA is the most powerfull country in the world, why? The answer is very simple, they have authority on the whole earth";
+int len = text.Length;
+int part = len / 3;
+
+
+int GetCountOfWords(string text) => text.Split().Where(w => !string.IsNullOrEmpty(w)).Count();
+
+void DisplayArray(int[] numbers) => numbers.ToList().ForEach(x => Console.WriteLine(x));
+
+
+
+string part1 = text.Substring(0, part);
+string part2 = text.Substring(part, part);
+string part3 = text.Substring(part * 2);
+var t1 = new Thread(() => Console.WriteLine(GetCountOfWords(part1)) );
+var t2 = new Thread(() => Console.WriteLine(GetCountOfWords(part2)));
+var t3 = new Thread(() => Console.WriteLine(GetCountOfWords(part3)));
 t1.Start();
 t2.Start();
+t3.Start();
 t1.Join();
 t2.Join();
+t3.Join();
